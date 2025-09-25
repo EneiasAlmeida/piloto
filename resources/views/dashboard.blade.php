@@ -14,10 +14,10 @@
         </h4>
        
         <div class="flex justify-end space-x-4">
-            <a href="#" class="bg-neutral-700 text-white px-2 py-2 rounded hover:bg-red-600">Dashboard</a>
-            <a href="#" class="bg-neutral-700 text-white px-4 py-2 rounded hover:bg-red-600">Cadastrar Eventos</a>
-            <a href="#" class="bg-neutral-700 text-white px-4 py-2 rounded hover:bg-red-600">Eventos</a>
-            <a href="#" class="bg-neutral-700 text-white px-4 py-2 rounded hover:bg-red-600">Relatórios</a>
+            <a href="{{ route('dashboard') }}" class="bg-neutral-700 text-white px-2 py-2 rounded hover:bg-red-600">Dashboard</a>
+            <a href="{{ route('event.create') }}" class="bg-neutral-700 text-white px-4 py-2 rounded hover:bg-red-600">Cadastrar Eventos</a>
+            <a href="{{ route('event.index') }}" class="bg-neutral-700 text-white px-4 py-2 rounded hover:bg-red-600">Eventos</a>
+            <a href="{{ route('event.index') }}" class="bg-neutral-700 text-white px-4 py-2 rounded hover:bg-red-600">Relatórios</a>
             <a href="#" class="bg-neutral-700 text-white px-4 py-2 rounded hover:bg-red-600">Sair</a>
         </div>
     </menu>

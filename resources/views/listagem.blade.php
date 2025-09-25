@@ -20,12 +20,12 @@
       </h4>
       <div class="flex space-x-4">
         <a
-          href="dashboard.html"
+          href="{{ route('dashboard') }}"
           class="bg-neutral-700 text-white px-4 py-2 rounded hover:bg-red-600"
           >Dashboard</a
         >
         <a
-          href="#"
+          href="{{ route('event.create') }}"
           class="bg-neutral-700 text-white px-4 py-2 rounded hover:bg-red-600"
           >Cadastrar</a
         >

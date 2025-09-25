@@ -35,7 +35,7 @@
         <button type="submit" class="bg-neutral-700 rounded py-3 text-white hover:bg-green-800 transition duration-500 w-full">
           Entrar
         </button> 
-        <button type="button" class="bg-neutral-700 rounded py-3 text-white hover:bg-green-800 transition duration-500 w-full">
+        <button type="submit" class="bg-neutral-700 rounded py-3 text-white hover:bg-green-800 transition duration-500 w-full">
           Cadastrar-se
         </button>
       </form>
