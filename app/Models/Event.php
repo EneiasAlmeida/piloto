@@ -12,16 +12,19 @@ class Event extends Model
     /**
      * Campos que podem ser preenchidos em massa (mass assignment)
      */
-    protected $fillable = [
-        'titulo',
-        'descricao',
-        'data',
-        'local',
-    ];
+  
 
+    protected $fillable = [
+        'name',
+        'location',
+        'description',
+        'startDate',
+        'endDate',
+    ];
+}
     /**
      * Se tua tabela tiver outro nome diferente de "events",
      * descomenta a linha abaixo e ajusta o nome.
      */
     // protected $table = 'meus_eventos';
-}
+

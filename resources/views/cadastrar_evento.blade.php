@@ -9,15 +9,15 @@
 <body class="bg-neutral-900 min-h-screen">
   <!-- MENU -->
   <menu class="bg-neutral-700 h-20 flex items-center justify-between px-6 space-x-4">
-    <img src="img/imagem 1-transparente.png" alt="Logo" class="w-35 h-16 object-cover rounded">> 
+    <img src="img/imagem 1-transparente.png" alt="Logo" class="w-35 h-16 object-cover rounded"> 
     <h4 class="text-2xl font-bold tracking-tighter">
       <span class="text-red-500">DebEne</span><span class="text-white">Eventos</span>
     </h4>
     <div class="flex justify-end space-x-4">
       <a href="{{ route('dashboard') }}" class="bg-neutral-700 text-white px-2 py-2 rounded hover:bg-red-600">Dashboard</a>
-      <a href="#" class="bg-neutral-700 text-white px-4 py-2 rounded hover:bg-red-600">Cadastrar Eventos</a>
+      <a href="{{ route('event.create') }}" class="bg-neutral-700 text-white px-4 py-2 rounded hover:bg-red-600">Cadastrar Eventos</a>
       <a href="{{ route('detalhes') }}" class="bg-neutral-700 text-white px-4 py-2 rounded hover:bg-red-600">Eventos</a>
-      <a href="{{ route('listagem') }}" class="bg-neutral-700 text-white px-4 py-2 rounded hover:bg-red-600">Relatórios</a>
+      <a href="{{ route('relatorios') }}" class="bg-neutral-700 text-white px-4 py-2 rounded hover:bg-red-600">Relatórios</a>
       <a href="#" class="bg-neutral-700 text-white px-4 py-2 rounded hover:bg-red-600">Sair</a>
     </div>
   </menu>
@@ -38,47 +38,58 @@
         <article class="bg-neutral-900 rounded p-4">
           <h1 class="bg-neutral-700 rounded text-white text-center text-lg font-bold mb-6">Cadastrar Evento</h1>
 
-          <form class="grid grid-cols-12 gap-6">
+          <!-- FORMULÁRIO QUE ENVIA PARA O CONTROLLER -->
+          <form action="{{ route('event.store') }}" method="POST" class="grid grid-cols-12 gap-6">
+            @csrf
+
             <!-- CODE -->
             <div class="col-span-12">
               <label for="code" class="font-bold text-red-500">Code:</label>
               <input type="text" id="code" name="code"
                 class="bg-neutral-400 text-black rounded p-2 w-full"
-                placeholder="Ex: gerado automaticamente e único" disabled>
+                placeholder="Gerado automaticamente" disabled>
             </div>
 
-            <!-- NAME e LOCATION lado a lado -->
+            <!-- NAME e LOCATION -->
             <div class="col-span-6">
               <label for="name" class="font-bold text-red-500">Name:</label>
               <input type="text" id="name" name="name"
                 class="bg-neutral-400 text-black rounded p-2 w-full"
-                placeholder="Ex: Enéias Trindade de Almeida">
+                placeholder="Ex: Casamento João e Maria" required>
             </div>
             <div class="col-span-6">
               <label for="location" class="font-bold text-red-500">Location:</label>
               <input type="text" id="location" name="location"
                 class="bg-neutral-400 text-black rounded p-2 w-full"
-                placeholder="Ex: Espaço Grill Eventos">
+                placeholder="Ex: Espaço Grill Eventos" required>
             </div>
 
-            <!-- DESCRIPTION (textarea maior) -->
+            <!-- DESCRIPTION -->
             <div class="col-span-12">
               <label for="description" class="font-bold text-red-500">Description:</label>
               <textarea id="description" name="description" rows="5" maxlength="500"
                 class="bg-neutral-400 text-black rounded p-2 w-full resize-none"
-                placeholder="Ex: Descrição detalhada de como vai ser o evento (máx 500 caracteres)"></textarea>
+                placeholder="Descrição detalhada do evento (máx 500 caracteres)"></textarea>
             </div>
 
-            <!-- STARTDATE e ENDDATE lado a lado -->
+            <!-- STARTDATE e ENDDATE -->
             <div class="col-span-6">
-              <label for="startDate" class="font-bold text-red-500">StartDate:</label>
+              <label for="startDate" class="font-bold text-red-500">Start Date:</label>
               <input type="date" id="startDate" name="startDate"
-                class="bg-neutral-400 text-black rounded p-2 w-full">
+                class="bg-neutral-400 text-black rounded p-2 w-full" required>
             </div>
             <div class="col-span-6">
-              <label for="endDate" class="font-bold text-red-500">EndDate:</label>
+              <label for="endDate" class="font-bold text-red-500">End Date:</label>
               <input type="date" id="endDate" name="endDate"
-                class="bg-neutral-400 text-black rounded p-2 w-full">
+                class="bg-neutral-400 text-black rounded p-2 w-full" required>
+            </div>
+
+            <!-- BOTÃO SALVAR -->
+            <div class="col-span-12 flex justify-center mt-6">
+              <button type="submit"
+                class="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2 rounded">
+                Salvar Evento
+              </button>
             </div>
           </form>
         </article>

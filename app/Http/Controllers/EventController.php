@@ -19,21 +19,43 @@ class EventController extends Controller
     public function create():View{
         return view('cadastrar_evento');
     }
-    public function store(storeEventRequest $request):RedirectResponse{ 
-        $validated = $request->validated(); 
-        Event::create($validated);               
-        // Todo- Salvar os dados no banco de dados             
-        return redirect()->route('event.index')
-                         ->with('success','Evento cadastrado com sucesso!!!'); // redireciona de volta com mensagem de sucesso
+    public function store(Request $request)
+{
+    // Validação básica
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'location' => 'required|string|max:255',
+        'description' => 'nullable|string|max:500',
+        'startDate' => 'required|date',
+        'endDate' => 'required|date|after_or_equal:startDate',
+    ]);
+
+    // Cria no banco
+    Event::create($validated);
+
+    // Redireciona de volta para a lista com mensagem
+    return redirect()->route('event.index')->with('success', 'Evento cadastrado com sucesso!');
+}
+    // public function store(storeEventRequest $request):RedirectResponse{ 
+    //     $validated = $request->validated(); 
+    //     Event::create($validated);               
+    //     // Todo- Salvar os dados no banco de dados             
+    //     return redirect()->route('event.index')
+    //                      ->with('success','Evento cadastrado com sucesso!!!'); // redireciona de volta com mensagem de sucesso
+    // }
+    public function show($id): View
+    {
+        $evento = Event::findOrFail($id);
+        return view('detalhes', compact('evento'));
     }
-    public function show(int $code):?View{ // Método show recebe um código (id do evento) e pode retornar uma View ou null
-        $event = Event::find($code);       // Busca no banco de dados o evento pelo código fornecido
-        if(!$event){
-            abort(404, 'Evento não encontrado');
-        }
-        return  view ('detalhes',[ 'event' =>$event]);   // Retorna a view 'detalhes' passando o objeto $evento                // A variável 'evento' ficará disponível na view
+    // public function show(int $code):?View{ // Método show recebe um código (id do evento) e pode retornar uma View ou null
+    //     $event = Event::find($code);       // Busca no banco de dados o evento pelo código fornecido
+    //     if(!$event){
+    //         abort(404, 'Evento não encontrado');
+    //     }
+    //     return  view ('detalhes',[ 'event' =>$event]);   // Retorna a view 'detalhes' passando o objeto $evento                // A variável 'evento' ficará disponível na view
         
-    }
+    // }
     public function edit(int $code):?View{
         $event = Event::find($code);
         if(!$event){ abort(404);

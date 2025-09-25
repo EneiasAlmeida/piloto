@@ -11,11 +11,17 @@ Route::post( '/event' , [EventController::class,'store'])->name('event.store');
 Route::get( '/event/{id}', [EventController::class,'show'])->name('event.show');
 Route::get( '/event/{id}/edit', [EventController::class,'edit'])->name('event.edit');
 Route::put( '/event/{id}', [EventController::class,'update'])->name('event.update');
+
+
 Route::delete('event/{id}', [EventController::class,'destroy'])->name('event.destroy');
 Route::get('/event/filter', [EventController::class, 'filter'])->name('event.filter');
 
 Route::get('/dashboard' , function ():View {
     return view('dashboard');})->name('dashboard');
+
+       Route::get('/relatorios', function () {
+        return view('listagem');
+    })->name('relatorios');
 
  
   
