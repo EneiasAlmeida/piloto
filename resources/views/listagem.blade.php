@@ -44,7 +44,7 @@
 
     <!-- CONTEÚDO -->
     <section
-      class="max-w-6xl mx-auto mt-10 p-6 bg-neutral-800 rounded-lg shadow-lg"
+      class="max-w-7xl mx-auto mt-10 p-6 bg-neutral-800 rounded-lg shadow-lg"
     >
       <h2 class="text-3xl font-bold text-center mb-6">
         <span class="text-red-600">Eventos</span>
@@ -93,6 +93,9 @@
                 <button class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
                   Excluir
                 </button>
+                <button class="bg-slate-600 px-3 py-1 rounded hover:bg-red-700">
+                  Detalhes
+                </button>
               </td>
             </tr>
             <tr class="border-b border-neutral-700 hover:bg-neutral-600">
@@ -102,9 +105,9 @@
               <td class="px-4 py-2">Salão Paroquial Novo Hamburgo</td>
               <td class="px-4 py-2 text-yellow-400">Realizados</td>
               <td class="px-4 py-2 text-center space-x-2">
-                <button class="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
+                <a href="" class="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
                   Editar
-                </button>
+                </a>
                 <button class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
                   Excluir
                 </button>
