@@ -25,9 +25,8 @@ Route::get('/dashboard' , function ():View {
         return view('listagem');
     })->name('relatorios');
 
- 
-  
-    
 
-
-    
+// Rotas do login / Usuário
+// Route::get('/index', [LoginController::class, 'index'])->name('users.login');
+// Route::get('/users/create', [LoginController::class, 'create'])->name('users.create');
+// Route::post('/users/create', [LoginController::class, 'store'])->name('users.store');
