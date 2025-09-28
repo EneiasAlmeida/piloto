@@ -72,12 +72,15 @@
               <td class="px-4 py-2">Salão Marmô</td>
               <td class="px-4 py-2 text-yellow-400">Agendado</td>
               <td class="px-4 py-2 text-center space-x-2">
-                <button class="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
+                <a href="#" class="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
                   Editar
-                </button>
-                <button class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
+                </a>
+                <a href="#" class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
                   Excluir
-                </button>
+                </a>
+                <a href="#" class= "bg-green-500 px-3 py-1 rounded hover:bg-green-700">
+                  Detalhes
+                <a>
               </td>
             </tr>
             <tr class="border-b border-neutral-700 hover:bg-neutral-600">
@@ -87,15 +90,15 @@
               <td class="px-4 py-2">Restaurante e Pizzaria Portal</td>
               <td class="px-4 py-2 text-yellow-400">Concluido</td>
               <td class="px-4 py-2 text-center space-x-2">
-                <button class="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
+                <a href="#" class="bg-blue-600 px-3 py-1 rounded hover:bg-red-700">
                   Editar
-                </button>
-                <button class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
+                </a>
+                <a href="#" class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
                   Excluir
-                </button>
-                <button class="bg-slate-600 px-3 py-1 rounded hover:bg-red-700">
+                </a>
+                <a href="#" class= "bg-green-500 px-3 py-1 rounded hover:bg-green-700">
                   Detalhes
-                </button>
+                <a>
               </td>
             </tr>
             <tr class="border-b border-neutral-700 hover:bg-neutral-600">
@@ -105,12 +108,15 @@
               <td class="px-4 py-2">Salão Paroquial Novo Hamburgo</td>
               <td class="px-4 py-2 text-yellow-400">Realizados</td>
               <td class="px-4 py-2 text-center space-x-2">
-                <a href="" class="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
+                <a href="#" class="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
                   Editar
                 </a>
-                <button class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
+                <a href="#" class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
                   Excluir
-                </button>
+                </a>
+                <a href="#" class= "bg-green-500 px-3 py-1 rounded hover:bg-green-700">
+                  Detalhes
+                <a>
               </td>
             </tr>
             <tr class="border-b border-neutral-700 hover:bg-neutral-600">
@@ -120,12 +126,15 @@
               <td class="px-4 py-2">Salão Paroquial Novo Hamburgo</td>
               <td class="px-4 py-2 text-yellow-400">Agendado e a Confirmar</td>
               <td class="px-4 py-2 text-center space-x-2">
-                <button class="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
+                <a hrfe="#" class="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
                   Editar
-                </button>
-                <button class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
+                </a>
+                <a hrfe="#" class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
                   Excluir
-                </button>
+                  </a>
+                  <a href="{{ route('books.show',['']) }}" class= "bg-green-500 px-3 py-1 rounded hover:bg-green-700">
+                  Detalhes
+                <a>
               </td>
             </tr>
             <tr class="border-b border-neutral-700 hover:bg-neutral-600">
@@ -135,12 +144,15 @@
               <td class="px-4 py-2">CDL Novo Hamburgo</td>
               <td class="px-4 py-2 text-yellow-400">Agendado e a Confirmar</td>
               <td class="px-4 py-2 text-center space-x-2">
-                <button class="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
+                <a hrfe="#" class="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
                   Editar
-                </button>
-                <button class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
+                </a>
+                <a hrfe="#" class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
                   Excluir
-                </button>
+                </a>
+                <a href="#" class= "bg-green-500 px-3 py-1 rounded hover:bg-green-700">
+                  Detalhes
+                <a>
               </td>
             </tr>
             <tr class="border-b border-neutral-700 hover:bg-neutral-600">
@@ -150,8 +162,15 @@
               <td class="px-4 py-2">Salão Paroquial São Leopoldo</td>
               <td class="px-4 py-2 text-yellow-400">Agendado e a Confirmar</td>
               <td class="px-4 py-2 text-center space-x-2">
-                <button class="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
+                <a hrfe="#" class="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
                   Editar
+                  <a>
+                    <a href="#" class= "bg-red-600 px-3 py-1 rounded hover:bg-red-700">
+                  Excluir
+                <a>
+                  <a href="#" class= "bg-green-500 px-3 py-1 rounded hover:bg-green-700">
+                  Detalhes
+                <a>
                   <script>
                     document
                       .querySelectorAll("button.bg-blue-600")
@@ -185,9 +204,7 @@
                       });
                   </script>
                 </button>
-                <button class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
-                  Excluir
-                </button>
+                
               </td>
             </tr>
           </tbody>
