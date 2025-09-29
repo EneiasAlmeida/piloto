@@ -16,8 +16,12 @@
 
     <!-- Formulário -->
     <div class="flex items-center justify-center w-full">
-      <form class="bg-neutral-800 w-full max-w-md text-white rounded-lg shadow-lg p-6 flex flex-col gap-4 text-center">
-        
+      <form 
+        method="POST"
+        {{-- action="{{ route(name: 'login.store') }}" --}}
+        action="/login/store"
+        class="bg-neutral-800 w-full max-w-md text-white rounded-lg shadow-lg p-6 flex flex-col gap-4 text-center"
+      >
         <div>
             <h2 class="text-3xl md:text-4xl font-bold tracking-tighter">
               <span class="text-red-600">DebEne</span>

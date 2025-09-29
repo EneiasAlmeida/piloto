@@ -7,22 +7,36 @@ use Illuminate\View\View;
 
 class EventController extends Controller
 {
-    public function index(Request $request): View{
-        return view(view:'index');
+    public function index(Request $request): View
+    {
+        return view(view: 'index');
     }
-    public function create():View{
+    public function listagem(Request $request): View
+    {
+        return view(view: 'listagem');
+    }
+    public function create(): View
+    {
         return view('cadastrar_login');
     }
-    public function show(string $isbn):View{
-        return view(view: 'dashboard');
+    public function edit(string $id): View
+    {
+        return view('editar');
     }
-    public function createEvento(string $isbn):View{
-        return view(view:'cadastrar_evento'); 
+    public function show(string $id): View
+    {
+        return view(view: 'detalhes');
     }
-    public function showListagem(string $isbn):View{
-        return view(view:'listagem'); 
+    public function createEvento(string $id): View
+    {
+        return view(view: 'cadastrar_evento');
     }
-    public function showDetalhes(string $isbn):View{
-        return view(view:'detalhes'); 
+    public function showListagem(string $id): View
+    {
+        return view(view: 'listagem');
+    }
+    public function showDetalhes(string $id): View
+    {
+        return view(view: 'detalhes');
     }
 }

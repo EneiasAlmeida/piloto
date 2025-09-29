@@ -18,7 +18,7 @@ class LoginController extends Controller
     }
     public function store(StoreLoginRequest $request):RedirectResponse{
         $validated = $request->validated();
-        return redirect()->route('event.dashboard');
+        return redirect()->route('dashboard');
     }
 
 }

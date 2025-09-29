@@ -13,8 +13,8 @@ use Illuminate\View\View;
 class EventController extends Controller
 {
     public function index(): View{
-        $eventos = Event::all();
-        return view('listagem', compact('eventos'));
+        $events = Event::all();
+        return view('event.index', compact('events'));
     }
     public function create():View{
         return view('cadastrar_evento');
@@ -36,6 +36,13 @@ class EventController extends Controller
     // Redireciona de volta para a lista com mensagem
     return redirect()->route('event.index')->with('success', 'Evento cadastrado com sucesso!');
 }
+
+    public function listagem(): View
+{
+    $events = Event::all(); // pega todos os eventos
+    return view('listagem', compact('events')); // abre resources/views/listagem.blade.php
+}
+
     // public function store(storeEventRequest $request):RedirectResponse{ 
     //     $validated = $request->validated(); 
     //     Event::create($validated);               
