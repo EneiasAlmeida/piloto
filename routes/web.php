@@ -8,10 +8,10 @@ use App\Http\Controllers\LoginController;
 
 // Rotas de evento
 Route::get('/event', [EventController::class, 'index'])->name('event.index');
+Route::get('/event/{id}/detalhes', [EventController::class, 'show'])->name('event.detalhes');
 Route::get('/event/list', [EventController::class, 'listagem'])->name('event.list');
 Route::get('/event/create',  [EventController::class, 'create'])->name('event.create');
 Route::post('/event', [EventController::class, 'store'])->name('event.store');
-Route::get('/event/{id}', [EventController::class, 'show'])->name('event.show');
 Route::get('/event/{id}/edit', [EventController::class, 'edit'])->name('event.edit');
 Route::put('/event/{id}', [EventController::class, 'update'])->name('event.update');
 Route::delete('event/{id}', [EventController::class, 'destroy'])->name('event.destroy');
@@ -26,6 +26,16 @@ Route::get('/relatorios', function () {
 })->name('relatorios');
 
 // Rotas do login / Usuário
-Route::get('/', [LoginController::class, 'index'])->name('login.index');
-Route::get('/login/create', [LoginController::class, 'create'])->name('login.create');
+Route::get('/', [LoginController::class, 'show'])->name('login.show');
 Route::post('/login/store', [LoginController::class, 'store'])->name('login.store');
+Route::get('/login/create', [LoginController::class, 'create'])->name('login.create');
+Route::get('/login/register', [LoginController::class, 'register'])->name('login.register');
+
+// Route::get('/login', [LoginController::class, 'showLogin'])->name('login.show');
+// Route::post('/login/store', [LoginController::class, 'store'])->name('login.store');
+
+// Route::get('/register', [LoginController::class, 'showRegister'])->name('register.show');
+// Route::post('/register/store', [LoginController::class, 'register'])->name('register.store');
+
+// Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard')->middleware('auth.session');
+// Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

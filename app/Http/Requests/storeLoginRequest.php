@@ -4,27 +4,28 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class storeLoginRequest extends FormRequest
+class StoreLoginRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            'name' => 'required|min:5',
-            'email'=> 'required|email',
-            'password'=> 'required|between:8,100',
+            'user-email' => 'required|email',
+            'user-password' => 'required|min:6',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'user-email.required' => 'O email é obrigatório',
+            'user-email.email' => 'Digite um email válido',
+            'user-password.required' => 'A senha é obrigatória',
+            'user-password.min' => 'A senha deve ter pelo menos 6 caracteres',
         ];
     }
 }

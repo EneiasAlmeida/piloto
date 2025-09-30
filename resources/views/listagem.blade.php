@@ -60,7 +60,8 @@
                             <a href="#" class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
                                 Excluir
                             </a>
-                            <a href="#" class= "bg-green-500 px-3 py-1 rounded hover:bg-green-700">
+                            <a href="{{ route('event.detalhes', ['id' => '1']) }}"
+                                class= "bg-green-500 px-3 py-1 rounded hover:bg-green-700">
                                 Detalhes
                                 <a>
                         </td>
@@ -79,7 +80,8 @@
                             <a href="#" class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
                                 Excluir
                             </a>
-                            <a href="#" class= "bg-green-500 px-3 py-1 rounded hover:bg-green-700">
+                            <a href="{{ route('event.detalhes', ['id' => '2']) }}"
+                                class= "bg-green-500 px-3 py-1 rounded hover:bg-green-700">
                                 Detalhes
                                 <a>
                         </td>
@@ -98,7 +100,8 @@
                             <a href="#" class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
                                 Excluir
                             </a>
-                            <a href="#" class= "bg-green-500 px-3 py-1 rounded hover:bg-green-700">
+                            <a href="{{ route('event.detalhes', ['id' => '3']) }}"
+                                class= "bg-green-500 px-3 py-1 rounded hover:bg-green-700">
                                 Detalhes
                                 <a>
                         </td>
@@ -117,81 +120,10 @@
                             <a href="#" class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
                                 Excluir
                             </a>
-                            <a href="{{ route('event.show', ['id' => '4']) }}"
+                            <a href="{{ route('event.detalhes', ['id' => '4']) }}"
                                 class= "bg-green-500 px-3 py-1 rounded hover:bg-green-700">
                                 Detalhes
                                 <a>
-                        </td>
-                    </tr>
-                    <tr class="border-b border-neutral-700 hover:bg-neutral-600">
-                        <td class="px-4 py-2">5</td>
-                        <td class="px-4 py-2">Aniversário João</td>
-                        <td class="px-4 py-2">25/12/2025</td>
-                        <td class="px-4 py-2">CDL Novo Hamburgo</td>
-                        <td class="px-4 py-2 text-yellow-400">Agendado e a Confirmar</td>
-                        <td class="px-4 py-2 text-center space-x-2">
-                            <a href="{{ route('event.edit', ['id' => '5']) }}"
-                                class="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
-                                Editar
-                            </a>
-                            <a hrfe="#" class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">
-                                Excluir
-                            </a>
-                            <a href="#" class= "bg-green-500 px-3 py-1 rounded hover:bg-green-700">
-                                Detalhes
-                                <a>
-                        </td>
-                    </tr>
-                    <tr class="border-b border-neutral-700 hover:bg-neutral-600">
-                        <td class="px-4 py-2">6</td>
-                        <td class="px-4 py-2">Aniversário Bruna</td>
-                        <td class="px-4 py-2">31/12/2025</td>
-                        <td class="px-4 py-2">Salão Paroquial São Leopoldo</td>
-                        <td class="px-4 py-2 text-yellow-400">Agendado e a Confirmar</td>
-                        <td class="px-4 py-2 text-center space-x-2">
-                            <a href="{{ route('event.edit', ['id' => '6']) }}"
-                                class="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
-                                Editar
-                            </a>
-                            <a href="#" class= "bg-red-600 px-3 py-1 rounded hover:bg-red-700">
-                                Excluir
-                                <a>
-                                    <a href="#" class= "bg-green-500 px-3 py-1 rounded hover:bg-green-700">
-                                        Detalhes
-                                        <a>
-                                            <script>
-                                                document
-                                                    .querySelectorAll("button.bg-blue-600")
-                                                    .forEach((botao) => {
-                                                        botao.addEventListener("click", function() {
-                                                            let linha = this.closest("tr"); // pega a linha
-
-                                                            // pega valores atuais
-                                                            let nome = linha.cells[1].innerText;
-                                                            let data = linha.cells[2].innerText;
-                                                            let local = linha.cells[3].innerText;
-                                                            let status = linha.cells[4].innerText;
-                                                            // pede novos valores ao usuário
-                                                            let novoNome = prompt("Editar nome do evento:", nome);
-                                                            let novaData = prompt("Editar data do evento:", data);
-                                                            let novoLocal = prompt(
-                                                                "Editar local do evento:",
-                                                                local
-                                                            );
-                                                            let novoStatus = prompt(
-                                                                "Editar status do evento:",
-                                                                status
-                                                            );
-
-                                                            // se o usuário digitou algo, atualiza na tabela
-                                                            if (novoNome) linha.cells[1].innerText = novoNome;
-                                                            if (novaData) linha.cells[2].innerText = novaData;
-                                                            if (novoLocal) linha.cells[3].innerText = novoLocal;
-                                                            if (novoStatus) linha.cells[4].innerText = novoStatus;
-                                                        });
-                                                    });
-                                            </script>
-                                            </button>
                         </td>
                     </tr>
                 </tbody>

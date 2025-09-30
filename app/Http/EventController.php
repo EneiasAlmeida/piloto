@@ -15,6 +15,10 @@ class EventController extends Controller
     {
         return view(view: 'listagem');
     }
+    public function show(string $id): View
+    {
+        return view(view: 'detalhes');
+    }
     public function create(): View
     {
         return view('cadastrar_login');
@@ -23,20 +27,8 @@ class EventController extends Controller
     {
         return view('editar');
     }
-    public function show(string $id): View
-    {
-        return view(view: 'detalhes');
-    }
     public function createEvento(string $id): View
     {
         return view(view: 'cadastrar_evento');
-    }
-    public function showListagem(string $id): View
-    {
-        return view(view: 'listagem');
-    }
-    public function showDetalhes(string $id): View
-    {
-        return view(view: 'detalhes');
     }
 }

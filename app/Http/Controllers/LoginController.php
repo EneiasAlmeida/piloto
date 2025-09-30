@@ -3,22 +3,60 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
-use App\Http\Requests\storeLoginRequest;
+use App\Http\Requests\StoreLoginRequest;
 
 class LoginController extends Controller
 {
-    public function index():View{
-        return view('index');
+    // Exibir tela de login
+    public function show()
+    {
+        return view('login'); // resources/views/login.blade.php
     }
 
-    public function create():View{
-        return view('cadastrar_login');
+    // Processar login
+    public function store(StoreLoginRequest $request)
+    {
+        $data = $request->validated();
+
+        // Simulação de autenticação (sem banco)
+        if ($data['user-email'] === 'teste@teste.com' && $data['user-password'] === '123456') {
+            session(['user' => $data['user-email']]);
+            return redirect()->route('dashboard');
+        }
+
+        return back()->with('error', 'Credenciais inválidas!');
     }
-    public function store(StoreLoginRequest $request):RedirectResponse{
-        $validated = $request->validated();
+
+    // Exibir tela de cadastro
+    public function create()
+    {
+        return view('cadastrar_login'); // resources/views/cadastrar_login.blade.php
+    }
+
+    // Registrar usuário (simulação)
+    public function register(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        // Apenas salva em sessão (sem banco)
+        session(['user' => $request->email]);
+
         return redirect()->route('dashboard');
     }
 
+    // Tela após login
+    public function dashboard()
+    {
+        return view('dashboard', ['user' => session('user')]);
+    }
+
+    // Logout
+    public function logout()
+    {
+        session()->forget('user');
+        return redirect()->route('login.show');
+    }
 }
