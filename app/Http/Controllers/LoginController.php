@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreLoginRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -18,9 +20,13 @@ class LoginController extends Controller
     {
         $data = $request->validated();
 
-        // Simulação de autenticação (sem banco)
-        if ($data['user-email'] === 'teste@teste.com' && $data['user-password'] === '123456') {
-            session(['user' => $data['user-email']]);
+        $user = User::where('email', $request->email)->first();
+
+        
+        if ($user && Hash::check($request->password, $user->password)){
+            session(['user' => $user->email]); 
+            // login ok
+        
             return redirect()->route('dashboard');
         }
 
