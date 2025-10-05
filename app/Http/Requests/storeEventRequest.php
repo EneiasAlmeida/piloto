@@ -2,32 +2,31 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 
-class storeEventRequest extends FormRequest
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
+class StoreEventRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-          'code'=>'required| between:1,3',
-          'name'=>'required|between:5,50',
-          'description'=>'required|between:5,200',
-          'location'=>'required|between:5,100',
-          'startDate'=>'numeric|min:2025,max' . date('Y'),
-            'endDate' => 'numeric|min:2025,max' . date('Y')
+            'name' => [
+                'required',
+                'string',
+                'min:5',
+                'max:150',
+                'unique:events,name'
+            ],
+            'location' => ['required', 'string', 'min:5', 'max:150'],
+            'description' => ['nullable', 'string', 'max:500'],
+            'startDate' => ['required', 'date', 'after_or_equal:today'],
+            'endDate' => ['required', 'date', 'after_or_equal:startDate'],
         ];
     }
 }

@@ -2,17 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Event extends Model
 {
-    use HasFactory;
-
-    /**
-     * Campos que podem ser preenchidos em massa (mass assignment)
-     */
-  
+    public $incrementing = false; // Obrigatório para UUID
+    protected $keyType = 'string';
 
     protected $fillable = [
         'name',
@@ -21,10 +19,15 @@ class Event extends Model
         'startDate',
         'endDate',
     ];
-}
-    /**
-     * Se tua tabela tiver outro nome diferente de "events",
-     * descomenta a linha abaixo e ajusta o nome.
-     */
-    // protected $table = 'meus_eventos';
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($event) {
+            if (empty($event->code)) {
+                $event->code = (string) Str::uuid();
+            }
+        });
+    }
+}

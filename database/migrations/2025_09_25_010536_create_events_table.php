@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('events', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('code')->primary(); // Campo 'code' será a chave primária única e gerada via UUID
+            $table->string('name', 150)->unique();
+            $table->string('location', 150);
+            $table->string('description', 500)->nullable();
+            $table->dateTime('startDate');
+            $table->dateTime('endDate');
             $table->timestamps();
         });
     }
