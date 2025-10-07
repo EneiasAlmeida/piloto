@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->uuid('code')->primary(); // Campo 'code' será a chave primária única e gerada via UUID
-            $table->string('name', 150)->unique();
+            $table->string('name', 150);
             $table->string('location', 150);
             $table->string('description', 500)->nullable();
             $table->dateTime('startDate');

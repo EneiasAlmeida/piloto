@@ -26,13 +26,6 @@ class RegisterController extends Controller
         ]);
 
         // 3. Retorno com mensagem de sucesso
-        return redirect()->route('login')->with('success', 'Usuário cadastrado com sucesso!');
+        return redirect()->route('login.show')->with('success', 'Usuário cadastrado com sucesso!');
     }
 }
-
-
-
-
-
-  
-

@@ -3,66 +3,69 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreLoginRequest;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class LoginController extends Controller
 {
     // Exibir tela de login
     public function show()
     {
-        return view('login'); // resources/views/login.blade.php
+        return view('login');
     }
 
     // Processar login
-    public function store(StoreLoginRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->validated();
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-        $user = User::where('email', $request->email)->first();
-
-        
-        if ($user && Hash::check($request->password, $user->password)){
-            session(['user' => $user->email]); 
-            // login ok
-        
-            return redirect()->route('dashboard');
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate(); // protege contra session fixation
+            return redirect()->intended('/dashboard');
         }
 
-        return back()->with('error', 'Credenciais inválidas!');
+        return back()->with('error', 'E-mail ou senha incorretos.');
     }
 
     // Exibir tela de cadastro
     public function create()
     {
-        return view('cadastrar_login'); // resources/views/cadastrar_login.blade.php
+        return view('register');
     }
 
-    // Registrar usuário (simulação)
+    // Registrar usuário
     public function register(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
 
-        // Apenas salva em sessão (sem banco)
-        session(['user' => $request->email]);
+        User::create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('login.show')->with('success', 'Usuário criado com sucesso!');
     }
 
-    // Tela após login
+    // Tela principal
     public function dashboard()
     {
-        return view('dashboard', ['user' => session('user')]);
+        return view('dashboard');
     }
 
     // Logout
-    public function logout()
+    public function logout(Request $request)
     {
-        session()->forget('user');
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect()->route('login.show');
     }
 }

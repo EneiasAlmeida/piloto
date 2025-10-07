@@ -1,115 +1,107 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
-use App\Http\Requests\storeEventRequest;
-use App\Http\Requests\updateEventRequest;
 use App\Models\Event;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class EventController extends Controller
 {
-    public function index(): View{
-        $events = Event::all();
+    // LISTAGEM DE EVENTOS
+    public function index(): View
+    {
+        $events = Event::orderBy('startDate', 'asc')->get();
         return view('event.index', compact('events'));
     }
-    public function create():View{
-        return view('cadastrar_evento');
-    }
-    public function store(Request $request)
-{
-    // Validação básica
-    $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'location' => 'required|string|max:255',
-        'description' => 'nullable|string|max:500',
-        'startDate' => 'required|date',
-        'endDate' => 'required|date|after_or_equal:startDate',
-    ]);
 
-    // Cria no banco
-    Event::create($validated);
-
-    // Redireciona de volta para a lista com mensagem
-    return redirect()->route('event.index')->with('success', 'Evento cadastrado com sucesso!');
-}
-
-    public function listagem(): View
-{
-    $events = Event::all(); // pega todos os eventos
-    return view('listagem', compact('events')); // abre resources/views/listagem.blade.php
-}
-
-    // public function store(storeEventRequest $request):RedirectResponse{ 
-    //     $validated = $request->validated(); 
-    //     Event::create($validated);               
-    //     // Todo- Salvar os dados no banco de dados             
-    //     return redirect()->route('event.index')
-    //                      ->with('success','Evento cadastrado com sucesso!!!'); // redireciona de volta com mensagem de sucesso
-    // }
-    public function show($id): View
+    // FORMULÁRIO DE CRIAÇÃO
+    public function create(): View
     {
-        $evento = Event::findOrFail($id);
-        return view('detalhes', compact('evento'));
+        return view('event.create');
     }
-    // public function show(int $code):?View{ // Método show recebe um código (id do evento) e pode retornar uma View ou null
-    //     $event = Event::find($code);       // Busca no banco de dados o evento pelo código fornecido
-    //     if(!$event){
-    //         abort(404, 'Evento não encontrado');
-    //     }
-    //     return  view ('detalhes',[ 'event' =>$event]);   // Retorna a view 'detalhes' passando o objeto $evento                // A variável 'evento' ficará disponível na view
-        
-    // }
-    public function edit(int $code):?View{
-        $event = Event::find($code);
-        if(!$event){ abort(404);
-        }    
-        return view('cadastrar_evento',['event' => $event]); 
-    }
-    public function update(updateEventRequest $request, int $id):RedirectResponse{ 
-         $validated = $request->validated();  
-         $event =Event::find($id);  
-         if(!$event){ 
-            return back()->withErrors(['Evento não encontrado.']);
-        }
-        $event->update($validated);            
-        // Todo- Salvar os dados no banco de dados             
-        return redirect()->route('event.index')
-                         ->with('success','Evento atualizado com sucesso!!!'); // redireciona de volta com mensagem de sucesso
-    }
-    public function destroy(int $code):RedirectResponse{
-        $event = Event::find($code); //busca o evento pelo ID
-        if(!$event){                // se não encontrar
-            return back()->withErrors('Evento não encontrado.');
-        }
-         $event->delete();              // exclui o evento do banco
-         return redirect()->route('event.index')
-         ->with(['success','Evento excluido com sucesso']);
 
+    // SALVAR NOVO EVENTO
+    public function store(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:events,name',
+            'location' => 'required|string|max:255',
+            'description' => 'nullable|string|max:500',
+            'startDate' => 'required|date',
+            'endDate' => 'required|date|after_or_equal:startDate',
+        ]);
+
+        // Cria o evento com UUID automático
+        Event::create($validated);
+
+        // Redireciona para a listagem de eventos
+        return redirect()
+            ->route('event.index')
+            ->with('success', 'Evento criado com sucesso!');
     }
-    public function filter(Request $request): View{   
-        // captura parametros de filtro da requisição
-        $titulo = $request->input( 'titulo');//exemplo: titulo ou reuniao
-        $data   = $request->input('data')   ; //exemplo: data =2025-09-23
-        
+
+    // FORMULÁRIO DE EDIÇÃO
+    public function edit(string $code): View
+    {
+        $event = Event::findOrFail($code);
+        return view('event.edit', compact('event'));
+    }
+
+    // ATUALIZAR EVENTO
+    public function update(Request $request, string $code): RedirectResponse
+    {
+        $event = Event::findOrFail($code);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:events,name,' . $event->code . ',code',
+            'location' => 'required|string|max:255',
+            'description' => 'nullable|string|max:500',
+            'startDate' => 'required|date',
+            'endDate' => 'required|date|after_or_equal:startDate',
+        ]);
+
+        $event->update($validated);
+
+        return redirect()
+            ->route('event.index')
+            ->with('success', 'Evento atualizado com sucesso!');
+    }
+
+    // EXCLUIR EVENTO
+    public function destroy(string $code): RedirectResponse
+    {
+        $event = Event::findOrFail($code);
+        $event->delete();
+
+        return redirect()
+            ->route('event.index')
+            ->with('success', 'Evento excluído com sucesso!');
+    }
+
+    // FILTRAR EVENTOS
+    public function filter(Request $request): View
+    {
         $query = Event::query();
 
-        if($titulo){
-            $query->where('titulo', 'like', "%$titulo%");
+        if ($request->filled('name')) {
+            $query->where('name', 'like', "%{$request->name}%");
         }
-        if($data){
-            $query->whereDate("data", $data);
-        }
-        
-        $eventos = $query->get();
-        // retorna view passando os eventos filtrados
-        return view('filter', compact('eventos'));                           
-    }
-}                        
-                  
-        
-    
 
+        if ($request->filled('startDate')) {
+            $query->whereDate('startDate', $request->startDate);
+        }
+
+        $events = $query->orderBy('startDate', 'asc')->get();
+
+        return view('event.index', compact('events'));
+    }
+
+    // EXIBIR DETALHES DE UM EVENTO (opcional)
+    public function show(string $code): View
+    {
+        $event = Event::findOrFail($code);
+        return view('event.show', compact('event'));
+    }
+}
