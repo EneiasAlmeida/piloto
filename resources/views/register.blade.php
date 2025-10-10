@@ -37,9 +37,9 @@
 
             <div>
                 <h2 class="text-4xl font-bold tracking-tighter mt-5 ">
-                    <span class="text-red-600">DebEne<span><span class="text-white">Eventos</span>
+                    <span class="text-red-600">Essa<span><span class="text-white">Veículos</span>
                 </h2>
-                <h3 class="text-neutral-400 italic"> SEU EVENTO, NOSSA PAIXÃO EM CADA DETALHE</h3>
+                <h3 class="text-neutral-400 italic"> SEU SONHO MAIS PERTO DE VOCÊ</h3>
             </div>
             <label for="user-name" class="cursor-pointer">Digite seu nome</label>
             <input type="text" id="user-name" name="user-name" class="bg-white rounded p-3 text-black w-full">

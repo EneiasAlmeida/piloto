@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>DebEne Eventos</title>
+    <title>Essa Veículos</title>
 </head>
 
 <body class="bg-neutral-900 min-h-screen flex flex-col items-center justify-center px-4">
@@ -35,7 +35,7 @@
 
     <div>
         <h2 class="text-3xl md:text-4xl font-bold tracking-tighter">
-            <span class="text-red-600">DebEne</span>
+            <span class="text-red-600">Debene</span>
             <span class="text-white">Eventos</span>
         </h2>
         <h3 class="text-neutral-400 italic text-sm md:text-base">"SEU EVENTO, NOSSA PAIXÃO EM CADA DETALHE"</h3>

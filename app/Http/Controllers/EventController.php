@@ -45,7 +45,7 @@ class EventController extends Controller
     // FORMULÁRIO DE EDIÇÃO
     public function edit(string $code): View
     {
-        $event = Event::findOrFail($code);
+        $event = Event::where('code', $code)->firstOrFail();
         return view('event.edit', compact('event'));
     }
 
@@ -101,7 +101,31 @@ class EventController extends Controller
     // EXIBIR DETALHES DE UM EVENTO (opcional)
     public function show(string $code): View
     {
-        $event = Event::findOrFail($code);
+        $event = Event::where('code', $code)->firstOrFail();
         return view('event.show', compact('event'));
     }
+    public function search(Request $request)
+{
+    $request->validate([
+        'location' => 'required|string|min:1',
+        'startDate' => 'nullable|date',
+        'endDate' => 'nullable|date|after_or_equal:startDate',
+    ]);
+
+    $query = Event::query();
+
+    $query->where('location', 'like', '%' . $request->location . '%');
+
+    if ($request->startDate) {
+        $query->where('startDate', '>=', $request->startDate);
+    }
+
+    if ($request->endDate) {
+        $query->where('endDate', '<=', $request->endDate);
+    }
+
+    $events = $query->orderBy('startDate')->get();
+
+    return view('event.index', compact('events'));
+}
 }

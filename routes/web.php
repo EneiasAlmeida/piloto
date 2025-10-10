@@ -51,13 +51,17 @@ Route::get('/event/{code}/edit', [EventController::class, 'edit'])->name('event.
 // Atualizar evento
 Route::put('/event/{code}', [EventController::class, 'update'])->name('event.update');
 
+// Excluir evento
+Route::delete('/event/{code}', [EventController::class, 'destroy'])->name('event.destroy');
+
 // Exibir detalhes de um evento
 Route::get('/event/{code}', [EventController::class, 'show'])->name('event.show');
 
-// Excluir evento
-Route::delete('/event/{code}', [EventController::class, 'destroy'])->name('event.destroy');
 
 // Filtrar eventos (opcional)
 Route::get('/event/filter', [EventController::class, 'filter'])->name('event.filter');
 
 Route::get('/event/list', [EventController::class, 'index'])->name('event.list');
+
+Route::get('/events/search', [App\Http\Controllers\EventController::class, 'search'])->name('event.search');
+
